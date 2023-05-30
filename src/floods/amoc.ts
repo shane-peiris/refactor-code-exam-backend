@@ -1,24 +1,34 @@
 import { Client } from "basic-ftp";
 
-export async function getWarnings() {
+const bomConfig = {
+  host: process.env.FTP_BOM_HOST || '',
+  path: process.env.FTP_BOM_PATH || '',
+}
+
+export async function getWarnings(stateId: string) {
   const client = new Client();
   client.ftp.verbose = true;
   try {
     await client.access({
-      host: "ftp.bom.gov.au",
+      host: bomConfig.host,
       secure: false,
     });
 
-    await client.cd("/anon/gen/fwo/");
+    await client.cd(bomConfig.path);
 
     const files = await client.list();
 
-    let warns: any = {};
-    for (var file in files) {
-      if (files[file].name.endsWith(".amoc.xml")) {
-        warns[files[file].name] = true;
-      }
-    }
+    let warns: any = [];
+
+    warns = files
+    ?.filter((file) => file.name.startsWith(stateId) && file.name.endsWith(".amoc.xml"))
+    ?.map((file) => file.name.replace(/\.amoc\.xml/, ""));
+
+    // for (var file in files) {
+    //   if (files[file].name.endsWith(".amoc.xml")) {
+    //     warns[files[file].name] = true;
+    //   }
+    // }
 
     return warns;
   } catch (err) {

@@ -1,0 +1,16 @@
+export const PRODUCT_TYPES = [
+    { abbrev: 'A', name: 'Advice' },
+    { abbrev: 'B', name: 'Bundle' },
+    { abbrev: 'C', name: 'Climate' },
+    { abbrev: 'D', name: 'Metadata' },
+    { abbrev: 'E', name: 'Analysis' },
+    { abbrev: 'F', name: 'Forecast' },
+    { abbrev: 'M', name: 'Numerical Weather Prediction' },
+    { abbrev: 'O', name: 'Observation' },
+    { abbrev: 'Q', name: 'Reference' },
+    { abbrev: 'R', name: 'Radar' },
+    { abbrev: 'S', name: 'Special' },
+    { abbrev: 'T', name: 'Satellite' },
+    { abbrev: 'W', name: 'Warning' },
+    { abbrev: 'X', name: 'Mixed' },
+]
